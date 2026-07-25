@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Privat Matematika — Ufuk Kinanti, S.Pd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --ink:#151010; --cream:#faf7f2; --gold:#b8903a; --gold2:#d4a955;
+  --teal:#1f5f5b; --teal2:#2d7d78; --rust:#8b3a2a;
+  --warm:#7a7068; --blush:#ede0d0; --lt:#f4efe7;
+}
+body { background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; }
+.page { max-width:920px; margin:0 auto; background:var(--cream); }
+
+/* HERO */
+.hero { background:var(--ink); position:relative; overflow:hidden; }
+.hero-noise {
+  position:absolute; inset:0;
+  background-image:
+    radial-gradient(ellipse 60% 80% at 80% 50%,rgba(184,144,58,.07) 0%,transparent 70%),
+    repeating-linear-gradient(60deg,transparent,transparent 50px,rgba(255,255,255,.013) 50px,rgba(255,255,255,.013) 51px);
+}
+.hero-topbar {
+  position:relative; z-index:3; background:var(--gold);
+  padding:9px 52px; display:flex; justify-content:space-between; align-items:center;
+}
+.hero-topbar span { font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--ink); }
+.hero-main {
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1.15fr 1px 1fr;
+  padding:56px 52px 50px; gap:0; align-items:center;
+}
+.hero-sep { background:rgba(184,144,58,.25); }
+.hero-left { padding-right:50px; }
+.eyebrow { font-size:10px; font-weight:700; letter-spacing:.28em; text-transform:uppercase; color:var(--gold2); margin-bottom:14px; }
+.hero-name { font-family:'Playfair Display',serif; font-weight:900; line-height:1.0; color:#fff; }
+.hero-name .fn { font-size:64px; display:block; }
+.hero-name .ln { font-size:64px; display:block; color:var(--gold2); }
+.hero-name .sfx {
+  font-family:'Cormorant Garamond',serif; font-size:21px; font-style:italic;
+  font-weight:300; color:rgba(255,255,255,.45); display:block; margin-top:8px; letter-spacing:.05em;
+}
+.hero-sub {
+  font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic;
+  font-weight:300; color:rgba(255,255,255,.4); margin-top:10px; line-height:1.65;
+}
+.hero-right { padding-left:50px; display:flex; flex-direction:column; gap:22px; }
+.h-stat { display:flex; flex-direction:column; gap:3px; }
+.h-stat-n { font-family:'Playfair Display',serif; font-size:40px; font-weight:700; color:var(--gold2); line-height:1; }
+.h-stat-l { font-size:10.5px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.42); }
+.h-rule { width:28px; height:1px; background:rgba(184,144,58,.3); }
+
+/* CRED STRIP */
+.cstrip { background:var(--teal); padding:15px 52px; display:flex; flex-wrap:wrap; gap:0; }
+.cstrip-item { display:flex; align-items:center; gap:9px; padding:0 22px 0 0; margin:3px 0; }
+.cstrip-item:not(:last-child) { border-right:1px solid rgba(255,255,255,.15); margin-right:22px; }
+.cdot { width:5px; height:5px; border-radius:50%; background:var(--gold2); flex-shrink:0; }
+.cstrip-item span { font-size:11px; font-weight:500; color:rgba(255,255,255,.82); letter-spacing:.04em; }
+
+/* SECTIONS */
+.sec { padding:52px 52px; }
+.sec-alt { background:#fff; }
+.slabel {
+  font-size:9.5px; font-weight:700; letter-spacing:.32em; text-transform:uppercase; color:var(--gold);
+  display:flex; align-items:center; gap:12px; margin-bottom:22px;
+}
+.slabel::after { content:''; flex:1; height:1px; max-width:100px; background:linear-gradient(to right,var(--gold),transparent); }
+.stitle { font-family:'Playfair Display',serif; font-size:34px; font-weight:700; line-height:1.15; color:var(--ink); margin-bottom:18px; }
+.stitle em { font-style:italic; color:var(--teal2); }
+
+/* WHY */
+.why-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.why-card { background:var(--cream); border-left:3px solid var(--gold); padding:20px 22px; position:relative; overflow:hidden; }
+.wc-n { font-family:'Playfair Display',serif; font-size:52px; font-weight:700; color:rgba(184,144,58,.09); position:absolute; top:4px; right:12px; line-height:1; }
+.wc-t { font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:7px; }
+.wc-d { font-size:13px; line-height:1.7; color:#4a4039; font-weight:300; }
+
+/* TESTIMONIALS */
+.tband { background:var(--ink); padding:50px 52px; position:relative; overflow:hidden; }
+.tband::before {
+  content:'\201C'; font-family:'Playfair Display',serif; font-size:280px;
+  color:rgba(184,144,58,.06); position:absolute; top:-60px; left:20px; line-height:1; pointer-events:none;
+}
+.t-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; position:relative; z-index:2; }
+.t-card { border-top:2px solid rgba(184,144,58,.35); padding-top:18px; }
+.t-q { font-family:'Cormorant Garamond',serif; font-size:14.5px; font-style:italic; font-weight:300; color:rgba(255,255,255,.8); line-height:1.75; margin-bottom:14px; }
+.t-auth { font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gold2); }
+.t-school { font-size:10px; color:rgba(255,255,255,.3); margin-top:2px; font-weight:300; }
+
+/* PRICING */
+.price-intro { font-family:'Cormorant Garamond',serif; font-size:17px; font-style:italic; color:var(--warm); line-height:1.75; margin-bottom:32px; }
+.tier-header { display:grid; grid-template-columns:1fr 140px 140px; background:var(--ink); }
+.tier-header div { padding:12px 16px; font-size:9.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold2); }
+.tier-header div:not(:first-child) { text-align:center; border-left:1px solid rgba(255,255,255,.08); }
+.tier-teal { background:var(--teal) !important; color:#fff !important; }
+.tier-gold { background:var(--gold) !important; color:var(--ink) !important; }
+.price-row { display:grid; grid-template-columns:1fr 140px 140px; border-bottom:1px solid #ece5d8; transition:background .15s; }
+.price-row:hover { background:#fdf9f4; }
+.price-row.feat-t { border-left:3px solid var(--teal); background:rgba(31,95,91,.04); }
+.price-row.feat-g { border-left:3px solid var(--gold); background:rgba(184,144,58,.04); }
+.pr-info { padding:14px 16px; }
+.pr-level { font-weight:600; font-size:13.5px; display:block; margin-bottom:2px; }
+.pr-sub { font-size:11.5px; color:var(--warm); font-weight:300; }
+.pr-price { padding:14px 16px; text-align:center; border-left:1px solid #ece5d8; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; }
+.pr-amt { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--teal); }
+.pr-amt.gold { color:var(--gold); }
+.pr-per { font-size:10px; color:var(--warm); }
+.badge { display:inline-block; font-size:8.5px; font-weight:700; letter-spacing:.1em; padding:2px 7px; text-transform:uppercase; border-radius:2px; margin-left:7px; vertical-align:middle; }
+.badge-t { background:var(--teal); color:#fff; }
+.badge-g { background:var(--gold); color:var(--ink); }
+.badge-r { background:var(--rust); color:#fff; }
+.price-note { font-size:12px; color:var(--warm); margin-top:14px; padding:13px 16px; background:var(--lt); border-left:3px solid var(--blush); line-height:1.7; }
+.price-note strong { color:var(--teal); }
+
+/* GROUP TABLE */
+.group-table { width:100%; border-collapse:collapse; margin-top:12px; }
+.group-table thead tr { background:var(--ink); }
+.group-table thead th { padding:11px 14px; font-size:9.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--gold2); text-align:left; }
+.group-table thead th:not(:first-child) { text-align:center; }
+.group-table tbody tr { border-bottom:1px solid #ece5d8; }
+.group-table tbody tr:hover { background:#fdf9f4; }
+.group-table td { padding:12px 14px; font-size:13px; color:var(--ink); }
+.group-table td:not(:first-child) { text-align:center; }
+.group-table .g-amt { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--teal); }
+.group-table .g-amt-g { color:var(--gold); }
+.group-table .g-note { font-size:11px; color:var(--warm); display:block; margin-top:2px; }
+
+/* TIER COMPARE */
+.tier-compare { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+.tier-box { border:1px solid #ddd4c4; padding:24px; }
+.tier-box.premium-box { background:var(--teal); border-color:var(--teal); }
+.tier-name { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+.tier-box.premium-box .tier-name { color:#fff; }
+.tier-tag { font-size:9.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; display:block; }
+.tier-box.premium-box .tier-tag { color:var(--gold2); }
+.tier-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.tier-list li { font-size:12.5px; color:#3a3028; font-weight:300; display:flex; gap:9px; align-items:flex-start; line-height:1.55; }
+.tier-list li::before { content:'✓'; color:var(--teal); font-weight:700; flex-shrink:0; margin-top:1px; font-size:11px; }
+.tier-box.premium-box .tier-list li { color:rgba(255,255,255,.82); }
+.tier-box.premium-box .tier-list li::before { color:var(--gold2); }
+.tier-note { font-size:11px; color:var(--warm); font-style:italic; margin-top:3px; }
+.tier-box.premium-box .tier-note { color:rgba(255,255,255,.45); }
+
+/* PACKAGES */
+.pkg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:28px; }
+.pkg { border:1px solid #ddd4c4; padding:22px 20px; position:relative; transition:transform .2s; }
+.pkg:hover { transform:translateY(-3px); }
+.pkg.hot { background:var(--teal); border-color:var(--teal); }
+.pkg-tag { font-size:9px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.pkg.hot .pkg-tag { color:var(--gold2); }
+.pkg-name { font-family:'Playfair Display',serif; font-size:21px; font-weight:700; color:var(--ink); margin-bottom:2px; }
+.pkg.hot .pkg-name { color:#fff; }
+.pkg-sess { font-size:11.5px; color:var(--warm); margin-bottom:14px; }
+.pkg.hot .pkg-sess { color:rgba(255,255,255,.55); }
+.pkg-price { font-family:'Playfair Display',serif; font-size:27px; font-weight:700; color:var(--teal); line-height:1; }
+.pkg.hot .pkg-price { color:var(--gold2); }
+.pkg-orig { font-size:11px; color:var(--warm); text-decoration:line-through; margin-top:2px; }
+.pkg.hot .pkg-orig { color:rgba(255,255,255,.35); }
+.pkg-save { display:inline-block; font-size:9.5px; font-weight:700; margin-top:4px; background:rgba(139,58,42,.1); color:var(--rust); padding:2px 8px; letter-spacing:.06em; }
+.pkg.hot .pkg-save { background:rgba(212,169,85,.2); color:var(--gold2); }
+.pkg-div { height:1px; background:#ddd4c4; margin:14px 0; }
+.pkg.hot .pkg-div { background:rgba(255,255,255,.18); }
+.pkg-perks { font-size:12px; color:#4a4039; line-height:1.65; font-weight:300; }
+.pkg.hot .pkg-perks { color:rgba(255,255,255,.75); }
+
+/* SUBJECTS */
+.subj-sec { background:var(--blush); padding:44px 52px; }
+.subj-grid { display:flex; flex-wrap:wrap; gap:9px; margin-top:8px; }
+.chip { padding:9px 18px; background:#fff; font-size:12.5px; font-weight:500; color:var(--ink); border:1px solid rgba(184,144,58,.22); }
+.chip.main { background:var(--ink); color:var(--gold2); border-color:var(--ink); font-weight:600; }
+.chip.new { background:var(--teal); color:#fff; border-color:var(--teal); }
+
+/* AREA */
+.area-sec { padding:52px 52px; background:#fff; }
+.area-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:8px; }
+.area-box { padding:16px 18px; border-top:3px solid; }
+.area-box.a1 { border-color:var(--teal); background:rgba(31,95,91,.04); }
+.area-box.a2 { border-color:var(--gold); background:rgba(184,144,58,.04); }
+.area-box.a3 { border-color:#ccc; background:var(--lt); }
+.area-tier { font-size:9.5px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; margin-bottom:8px; }
+.a1 .area-tier { color:var(--teal); } .a2 .area-tier { color:var(--gold); } .a3 .area-tier { color:var(--warm); }
+.area-list { font-size:12.5px; line-height:1.85; color:#3a3028; font-weight:300; }
+.area-note { margin-top:16px; font-size:12px; color:var(--warm); padding:12px 16px; background:var(--lt); border-left:3px solid var(--blush); line-height:1.7; }
+.area-note strong { color:var(--teal); }
+
+/* CREDENTIALS */
+.cred-sec { padding:52px 52px; display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+.cred-col-title { font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:var(--ink); margin-bottom:18px; padding-bottom:10px; border-bottom:2px solid var(--gold); }
+.cred-items { display:flex; flex-direction:column; gap:12px; }
+.cred-item-row { display:flex; gap:11px; align-items:flex-start; }
+.cred-icon { width:30px; height:30px; background:var(--lt); border:1px solid rgba(184,144,58,.25); display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; margin-top:1px; }
+.cred-main { font-size:13px; font-weight:600; color:var(--ink); line-height:1.4; }
+.cred-sub { font-size:11.5px; color:var(--warm); font-weight:300; margin-top:1px; line-height:1.45; }
+
+/* PROCESS */
+.proc-sec { background:var(--teal); padding:48px 52px; }
+.proc-sec .slabel { color:rgba(255,255,255,.4); }
+.proc-sec .slabel::after { background:linear-gradient(to right,rgba(255,255,255,.25),transparent); }
+.proc-sec .stitle { color:#fff; }
+.proc-sec .stitle em { color:var(--gold2); }
+.proc-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:28px; }
+.proc-step { position:relative; }
+.proc-step:not(:last-child)::after { content:'→'; position:absolute; top:18px; right:-12px; color:rgba(255,255,255,.2); font-size:18px; }
+.proc-n { font-family:'Playfair Display',serif; font-size:46px; font-weight:700; color:rgba(255,255,255,.1); line-height:1; margin-bottom:6px; }
+.proc-t { font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold2); margin-bottom:5px; }
+.proc-d { font-size:12px; color:rgba(255,255,255,.6); line-height:1.65; font-weight:300; }
+
+/* CONTACT */
+.contact-sec { background:var(--ink); padding:48px 52px; display:grid; grid-template-columns:1fr auto; gap:44px; align-items:center; }
+.c-tagline { font-family:'Playfair Display',serif; font-size:27px; font-weight:700; font-style:italic; color:#fff; line-height:1.35; margin-bottom:22px; }
+.c-tagline em { font-style:normal; color:var(--gold2); }
+.c-items { display:flex; flex-direction:column; gap:11px; }
+.c-item { display:flex; align-items:center; gap:13px; font-size:13px; color:rgba(255,255,255,.65); }
+.c-ico { width:30px; height:30px; background:rgba(184,144,58,.12); border:1px solid rgba(184,144,58,.28); display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+.c-val { font-weight:500; color:#fff; }
+.qr-box { width:100px; height:100px; background:rgba(255,255,255,.04); border:1px solid rgba(184,144,58,.25); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:4px; font-size:9.5px; color:rgba(255,255,255,.3); letter-spacing:.07em; text-transform:uppercase; text-align:center; line-height:1.6; }
+.footer-bar { background:var(--gold); padding:10px 52px; display:flex; justify-content:space-between; align-items:center; }
+.footer-bar span { font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); }
+
+@media(max-width:700px){
+  .hero-main,.tier-compare,.cred-sec,.contact-sec{grid-template-columns:1fr;}
+  .hero-sep{display:none;} .hero-left{padding-right:0;margin-bottom:28px;}
+  .hero-right{padding-left:0;flex-direction:row;flex-wrap:wrap;gap:16px;}
+  .hero-name .fn,.hero-name .ln{font-size:44px;}
+  .t-grid,.pkg-grid,.area-grid,.proc-grid,.why-grid{grid-template-columns:1fr;}
+  .price-row,.tier-header{grid-template-columns:1fr;}
+  .pr-price{border-left:none;border-top:1px solid #ece5d8;text-align:left;}
+  .sec,.area-sec,.subj-sec,.cred-sec,.proc-sec,.contact-sec,.hero-main,.hero-topbar,.cstrip,.footer-bar{padding-left:20px;padding-right:20px;}
+}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}body{background:#fff;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-topbar">
+    <span>Les Privat Matematika — SD · SMP · SMA · Kuliah · Dewasa · Olimpiade</span>
+    <span>Bekasi · Jakarta · Online</span>
+  </div>
+  <div class="hero-main">
+    <div class="hero-left">
+      <div class="eyebrow">Guru Matematika Privat Profesional</div>
+      <div class="hero-name">
+        <span class="fn">Ufuk</span>
+        <span class="ln">Kinanti</span>
+        <span class="sfx">S.Pd. Matematika — Universitas Negeri Jakarta</span>
+      </div>
+      <div class="hero-sub">Certified Teacher &nbsp;·&nbsp; 13+ Tahun Mengajar</div>
+    </div>
+    <div class="hero-sep"></div>
+    <div class="hero-right">
+      <div class="h-stat">
+        <span class="h-stat-n">13+</span>
+        <span class="h-stat-l">Tahun Pengalaman Privat</span>
+      </div>
+      <div class="h-rule"></div>
+      <div class="h-stat">
+        <span class="h-stat-n">SD–S1</span>
+        <span class="h-stat-l">Semua Jenjang Ditangani</span>
+      </div>
+      <div class="h-rule"></div>
+      <div class="h-stat">
+        <span class="h-stat-n">≈95%</span>
+        <span class="h-stat-l">Siswa Privat Diterima PTN Pilihan</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CRED STRIP -->
+<div class="cstrip">
+  <div class="cstrip-item"><div class="cdot"></div><span>S.Pd. Matematika — UNJ</span></div>
+  <div class="cstrip-item"><div class="cdot"></div><span>Certified Teacher · PPG Prajabatan</span></div>
+  <div class="cstrip-item"><div class="cdot"></div><span>Ex-Tim Matematika — PT Penerbit Erlangga</span></div>
+  <div class="cstrip-item"><div class="cdot"></div><span>TOEFL 600 · Bilingual Teaching</span></div>
+  <div class="cstrip-item"><div class="cdot"></div><span>13+ Tahun Mengajar Privat</span></div>
+</div>
+
+<!-- WHY -->
+<section class="sec">
+  <div class="slabel">Mengapa Ibu Kinanti</div>
+  <h2 class="stitle">Bukan sekadar guru.<br><em>Guru yang benar-benar diingat.</em></h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="wc-n">01</div>
+      <div class="wc-t">Metode Simpel &amp; Terstruktur</div>
+      <div class="wc-d">Materi sesulit apapun dipecah menjadi langkah sederhana. Siswa yang tadinya tidak paham sama sekali akhirnya bisa mengerjakan soal secara mandiri.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-n">02</div>
+      <div class="wc-t">Sabar, Tidak Pernah Menghakimi</div>
+      <div class="wc-d">Dikenal sebagai guru yang tidak pernah marah. Siswa merasa aman bertanya dan membuat kesalahan — fondasi terbaik untuk bisa berpikir matematika.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-n">03</div>
+      <div class="wc-t">Satu Guru, Semua Target</div>
+      <div class="wc-d">SNBT, TKA, SAT, GRE, GMAT, CPNS, PPG Prajabatan, Olimpiade — dari SD sampai dewasa, semua jalur ditangani oleh satu guru yang sama.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-n">04</div>
+      <div class="wc-t">Track Record Terbukti</div>
+      <div class="wc-d">Hampir seluruh siswa privat yang dipersiapkan untuk seleksi masuk universitas berhasil diterima di PTN dan program internasional pilihan mereka.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<div class="tband">
+  <div class="slabel" style="color:rgba(255,255,255,.35);margin-bottom:28px;">
+    Kata Mereka
+    <span style="flex:1;height:1px;background:linear-gradient(to right,rgba(255,255,255,.2),transparent);max-width:100px;display:inline-block;margin-left:12px;"></span>
+  </div>
+  <div class="t-grid">
+    <div class="t-card">
+      <div class="t-q">"Ibu itu PERFECT banget. Aku dulu paling susah ngerti matematika, tapi semenjak diajar Ibu aku jadi lumayan ngerti — karena Ibu selalu ngajarin supaya paham, bukan cuma kasih jawaban."</div>
+      <div class="t-auth">Almaida Destika</div>
+      <div class="t-school">Kelas 8C · SMPN 20 Bogor</div>
+    </div>
+    <div class="t-card">
+      <div class="t-q">"Jujur ga ada saran buat Ibu. Aku yang bener-bener ga ngerti MTK jadi suka MTK. Gatau kalau bukan Ibu yang ngajar, aku bakal tetap paham atau engga."</div>
+      <div class="t-auth">Mahen</div>
+      <div class="t-school">Kelas 8C · SMPN 20 Bogor</div>
+    </div>
+    <div class="t-card">
+      <div class="t-q">"Saya sangat senang dan selalu excited setiap pelajaran matematika bersama Bu Kinan — sangat seru dan sangat mudah dimengerti. Guru matematika paling aku suka cuman Bu Kinan."</div>
+      <div class="t-auth">Lovely &amp; Rasya</div>
+      <div class="t-school">Kelas 8B · SMPN 20 Bogor</div>
+    </div>
+  </div>
+  <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:2;">
+    <div class="t-q" style="font-size:13.5px;color:rgba(255,255,255,.55);max-width:680px;">"Saya heran kok Ibu bisa sabar banget. Penjelasannya mudah dipahami banget — sangat easy. Ibu adalah guru favorit saya."</div>
+    <div class="t-auth" style="margin-top:10px;">Asiah Ester · <span style="font-weight:300;color:rgba(255,255,255,.3);">Kelas 7F · SMPN 20 Bogor</span></div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="sec sec-alt">
+  <div class="slabel">Tarif Les Privat</div>
+  <h2 class="stitle">Harga kompetitif,<br><em>kualitas di atasnya.</em></h2>
+  <p class="price-intro">Semua tarif adalah <strong>per orang per sesi (90 menit)</strong>. Tidak ada biaya transportasi untuk area Bekasi Barat atau jarak ≤5 km dari lokasi pengajar.</p>
+
+  <div class="tier-header">
+    <div>Jenjang / Program</div>
+    <div class="tier-teal">Reguler</div>
+    <div class="tier-gold">Premium ⭐</div>
+  </div>
+
+  <!-- SD -->
+  <div class="price-row">
+    <div class="pr-info">
+      <span class="pr-level">SD Kelas 5–6</span>
+      <span class="pr-sub">Matematika Dasar · Persiapan SMP · TKA SD</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 130.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 155.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- SMP 7-8 -->
+  <div class="price-row feat-t">
+    <div class="pr-info">
+      <span class="pr-level">SMP Kelas 7–8</span>
+      <span class="pr-sub">Matematika SMP Lengkap</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 150.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 175.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- SMP 9 -->
+  <div class="price-row feat-g">
+    <div class="pr-info">
+      <span class="pr-level">SMP Kelas 9 <span class="badge badge-g">Populer</span></span>
+      <span class="pr-sub">Intensif · Ujian Kelulusan · TKA SMP</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 160.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 185.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- SMA 10-11 -->
+  <div class="price-row">
+    <div class="pr-info">
+      <span class="pr-level">SMA Kelas 10–11</span>
+      <span class="pr-sub">Matematika Wajib &amp; Peminatan</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 165.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 190.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- SMA 12 -->
+  <div class="price-row feat-g">
+    <div class="pr-info">
+      <span class="pr-level">SMA Kelas 12 <span class="badge badge-g">Populer</span></span>
+      <span class="pr-sub">Persiapan SNBT · TKA · Ujian Masuk Universitas</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 175.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 200.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- International -->
+  <div class="price-row feat-t">
+    <div class="pr-info">
+      <span class="pr-level">Program Internasional <span class="badge badge-r">Bilingual</span></span>
+      <span class="pr-sub">SAT Math · GRE Quant · GMAT · Ujian Masuk Kelas Internasional</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 200.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 235.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- Olimpiade -->
+  <div class="price-row">
+    <div class="pr-info">
+      <span class="pr-level">Olimpiade Matematika <span class="badge badge-t">SD · SMP · SMA</span></span>
+      <span class="pr-sub">Pembinaan Olimpiade · OSN · Kompetisi Matematika</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 175.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 200.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- Kuliah -->
+  <div class="price-row feat-t">
+    <div class="pr-info">
+      <span class="pr-level">Kuliah Awal (S1 Semester 1–2)</span>
+      <span class="pr-sub">Kalkulus · Aljabar Linear · Statistika · Diskrit</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 185.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 215.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- Dewasa CPNS -->
+  <div class="price-row">
+    <div class="pr-info">
+      <span class="pr-level">Kelas Dewasa — CPNS <span class="badge badge-t">Baru</span></span>
+      <span class="pr-sub">TIU CPNS · SKB Bidang Matematika</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 175.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 200.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <!-- PPG -->
+  <div class="price-row">
+    <div class="pr-info">
+      <span class="pr-level">Kelas Dewasa — PPG Prajabatan <span class="badge badge-t">Baru</span></span>
+      <span class="pr-sub">Tes Masuk PPG Prajabatan · Mapel Matematika</span>
+    </div>
+    <div class="pr-price"><span class="pr-amt">Rp 175.000</span><span class="pr-per">per orang</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 200.000</span><span class="pr-per">per orang</span></div>
+  </div>
+
+  <div class="price-note" style="margin-top:4px;">
+    <strong>Catatan:</strong> Semua tarif per orang per sesi (90 menit). Gratis biaya transportasi area Bekasi Barat &amp; radius ≤5 km. Area lain dikenakan biaya transportasi aktual.
+  </div>
+
+  <!-- GROUP -->
+  <div class="slabel" style="margin-top:36px;">Kelas Kelompok Kecil</div>
+  <p style="font-size:13px;color:var(--warm);margin-bottom:4px;">Makin banyak siswa, makin hemat per orang. Durasi 90 menit (Reguler) · 120 menit (Premium +30 menit ekstra).</p>
+  <table class="group-table">
+    <thead>
+      <tr>
+        <th>Jumlah Siswa</th>
+        <th>Durasi</th>
+        <th>Tarif Reguler / Siswa</th>
+        <th>Tarif Premium / Siswa</th>
+        <th>Hemat vs Privat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>2 Siswa</strong><span class="g-note">Berdua lebih seru</span></td>
+        <td>90 mnt<span class="g-note">Premium 120 mnt</span></td>
+        <td><span class="g-amt">Rp 100.000</span></td>
+        <td><span class="g-amt g-amt-g">Rp 120.000</span></td>
+        <td>Hemat ~33%</td>
+      </tr>
+      <tr>
+        <td><strong>3 Siswa</strong><span class="g-note">Paling direkomendasikan</span></td>
+        <td>90 mnt<span class="g-note">Premium 120 mnt</span></td>
+        <td><span class="g-amt">Rp 75.000</span></td>
+        <td><span class="g-amt g-amt-g">Rp 90.000</span></td>
+        <td>Hemat ~50%</td>
+      </tr>
+      <tr>
+        <td><strong>4 Siswa</strong></td>
+        <td>90 mnt<span class="g-note">Premium 120 mnt</span></td>
+        <td><span class="g-amt">Rp 60.000</span></td>
+        <td><span class="g-amt g-amt-g">Rp 72.000</span></td>
+        <td>Hemat ~60%</td>
+      </tr>
+      <tr>
+        <td><strong>5 Siswa</strong><span class="g-note">Maks. efisiensi</span></td>
+        <td>90 mnt<span class="g-note">Premium 120 mnt</span></td>
+        <td><span class="g-amt">Rp 50.000</span></td>
+        <td><span class="g-amt g-amt-g">Rp 60.000</span></td>
+        <td>Hemat ~67%</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="price-note">
+    <strong>Kelas Premium kelompok</strong> mendapat +30 menit ekstra (total 120 menit), modul soal eksklusif per pertemuan, dan laporan perkembangan individual tiap siswa. Konsultasi WhatsApp untuk kelas kelompok berjalan melalui <strong>satu grup bersama</strong>, sehingga seluruh anggota memperoleh jawaban yang sama.
+  </div>
+
+  <!-- ONLINE -->
+  <div class="slabel" style="margin-top:36px;">Kelas Online (Zoom / Google Meet)</div>
+  <div class="price-note" style="margin-bottom:12px;">
+  Tarif bersifat <strong>flat per sesi (90 menit)</strong> dan dapat digunakan hingga <strong>10 siswa</strong> dalam satu kelas online. Durasi kelas online sama untuk Reguler maupun Premium.
+</div>
+  <div class="tier-header">
+    <div>Jenjang</div>
+    <div class="tier-teal">Reguler</div>
+    <div class="tier-gold">Premium ⭐</div>
+  </div>
+  <div class="price-row">
+    <div class="pr-info"><span class="pr-level">SD Kelas 5–6</span></div>
+    <div class="pr-price"><span class="pr-amt">Rp 100.000</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 120.000</span></div>
+  </div>
+  <div class="price-row feat-t">
+    <div class="pr-info"><span class="pr-level">SMP Kelas 7–9</span></div>
+    <div class="pr-price"><span class="pr-amt">Rp 120.000</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 140.000</span></div>
+  </div>
+  <div class="price-row">
+    <div class="pr-info"><span class="pr-level">SMA Kelas 10–12</span></div>
+    <div class="pr-price"><span class="pr-amt">Rp 140.000</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 165.000</span></div>
+  </div>
+  <div class="price-row feat-t">
+    <div class="pr-info"><span class="pr-level">Program Internasional · Olimpiade · Kuliah</span></div>
+    <div class="pr-price"><span class="pr-amt">Rp 160.000</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 185.000</span></div>
+  </div>
+  <div class="price-row">
+    <div class="pr-info"><span class="pr-level">Kelas Dewasa · CPNS · PPG</span></div>
+    <div class="pr-price"><span class="pr-amt">Rp 140.000</span></div>
+    <div class="pr-price"><span class="pr-amt gold">Rp 165.000</span></div>
+  </div>
+
+  <!-- TIER COMPARE -->
+  <div class="slabel" style="margin-top:36px;">Reguler vs Premium — Apa Bedanya?</div>
+  <div class="tier-compare">
+    <div class="tier-box">
+      <span class="tier-tag">Kelas Reguler</span>
+      <div class="tier-name">Reguler</div>
+      <ul class="tier-list" style="margin-top:14px;">
+        <li><span>Sesi pengajaran penuh 90 menit</span></li>
+        <li><span>Materi disesuaikan kurikulum &amp; kebutuhan siswa</span></li>
+        <li><span>Komunikasi WhatsApp untuk konfirmasi jadwal</span></li>
+        <li><span>Reschedule dengan pemberitahuan H-1</span></li>
+      </ul>
+    </div>
+    <div class="tier-box premium-box">
+      <span class="tier-tag">⭐ Kelas Premium</span>
+      <div class="tier-name">Premium</div>
+      <ul class="tier-list" style="margin-top:14px;">
+        <li><span>Semua fasilitas Kelas Reguler</span></li>
+        <li><span>Prioritas booking jadwal <span class="tier-note">(slot terbaik selalu tersedia lebih dahulu untuk siswa Premium)</span></span></li>
+        <li><span>Modul ajar &amp; bank soal eksklusif gratis</span></li>
+        <li><span>Konsultasi soal matematika di luar jam sesi via WhatsApp, dijawab dalam 24 jam</span></li>
+        <li><span>Laporan perkembangan bulanan tertulis kepada siswa &amp; orang tua</span></li>
+        <li><span>Akses latihan soal digital sesuai target ujian</span></li>
+        <li><span>Tingkat kesulitan soal dapat disetel lebih tinggi — termasuk soal HOTS &amp; pola soal kompetitif untuk siswa yang siap melampaui kurikulum</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PACKAGES -->
+  <div class="slabel" style="margin-top:36px;">Paket Hemat Bulanan</div>
+  <p style="font-size:13px;color:var(--warm);margin-bottom:4px;">Berdasarkan Reguler SMP 7–8. Setiap paket mengunci harga, mengamankan slot tetap, dan disertai bonus modul digital.</p>
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-tag">Paket Rutin</div>
+      <div class="pkg-name">4 Sesi</div>
+      <div class="pkg-sess">1× seminggu · 90 menit/sesi</div>
+      <div class="pkg-price">Rp 572.000</div>
+      <div class="pkg-orig">Rp 600.000 (harga satuan)</div>
+      <div class="pkg-save">Potongan 5% · Rp 28.000</div>
+      <div class="pkg-div"></div>
+      <div class="pkg-perks">Pemantapan rutin mingguan tanpa khawatir kehabisan slot. Termasuk <strong>1 modul digital</strong> sesuai jenjang.</div>
+    </div>
+    <div class="pkg hot">
+      <div class="pkg-tag">⭐ Paling Direkomendasikan</div>
+      <div class="pkg-name">Paket Cerdas</div>
+      <div class="pkg-sess">8 sesi · 2× seminggu · 90 menit</div>
+      <div class="pkg-price">Rp 1.080.000</div>
+      <div class="pkg-orig">Rp 1.200.000 (harga satuan)</div>
+      <div class="pkg-save">Potongan 10% · Rp 120.000</div>
+      <div class="pkg-div"></div>
+      <div class="pkg-perks">Intensitas optimal, materi tuntas lebih cepat. Termasuk <strong>3 modul digital &amp; bank soal terpilih</strong>. Slot ditempatkan pada blok wilayah pengajar.</div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-tag">Paket Intensif</div>
+      <div class="pkg-name">12 Sesi</div>
+      <div class="pkg-sess">3× seminggu · 90 menit/sesi</div>
+      <div class="pkg-price">Rp 1.536.000</div>
+      <div class="pkg-orig">Rp 1.800.000 (harga satuan)</div>
+      <div class="pkg-save">Potongan 15% · Rp 264.000</div>
+      <div class="pkg-div"></div>
+      <div class="pkg-perks">Untuk persiapan SNBT, TKA, atau mengejar ketertinggalan materi. Termasuk <strong>paket modul lengkap &amp; simulasi ujian digital</strong>. Slot ditempatkan pada blok wilayah pengajar.</div>
+    </div>
+  </div>
+  <div class="price-note" style="margin-top:12px;">
+    <strong>Potongan tidak digabung.</strong> Tarif kelas kelompok sudah merupakan potongan hingga 67% terhadap tarif privat — potongan terbesar yang tersedia, sehingga tidak dijumlahkan lagi dengan potongan paket. Untuk kelas kelompok, paket berfungsi mengunci harga dan slot tetap. Potongan paket berlaku penuh untuk kelas privat pada semua jenjang.
+  </div>
+
+  <!-- KETENTUAN WAKTU -->
+  <div class="slabel" style="margin-top:36px;">Bagaimana Satu Sesi Dihitung</div>
+  <p style="font-size:13px;color:var(--warm);margin-bottom:18px;">Empat butir berikut bukan denda — ini definisi, supaya kedua pihak menghitung hal yang sama. Berlaku dua arah.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="wc-n">01</div>
+      <div class="wc-t">Waktu Dihitung Sejak Pengajar Tiba</div>
+      <div class="wc-d">Untuk tatap muka, jam belajar mulai berjalan ketika pengajar sudah sampai di lokasi. Untuk kelas online, ketika pengajar sudah masuk ruang meeting.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-n">02</div>
+      <div class="wc-t">Siswa Terlambat, Sesi Tetap Berakhir Pada Jamnya</div>
+      <div class="wc-d">Keterlambatan siswa tidak menambah durasi dan tidak menggeser jam selesai. Keterlambatan lebih dari 30 menit tanpa kabar: sesi dinyatakan selesai dan terhitung penuh.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-n">03</div>
+      <div class="wc-t">Pertemuan yang Sudah Dibooking Terhitung Terpakai</div>
+      <div class="wc-d">Satu slot yang telah dikunci berarti satu sesi terpakai, termasuk bila siswa terlambat atau tidak hadir — kecuali dibatalkan sesuai ketentuan reschedule.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-n">04</div>
+      <div class="wc-t">Bila Pengajar Terlambat, Waktu Diganti Penuh</div>
+      <div class="wc-d">Kekurangan menit diganti pada hari yang sama atau ditambahkan pada sesi berikutnya, tanpa memotong hak reschedule siswa.</div>
+    </div>
+  </div>
+
+  <div class="price-note" style="margin-top:16px;">
+    <strong>Kelas kelompok.</strong> Tarif ditentukan oleh jumlah siswa <strong>terdaftar</strong>, bukan jumlah yang hadir — bila satu siswa berhalangan, sesi tetap berjalan dan tarif siswa lain tidak berubah. Pembayaran dikoordinasikan oleh satu penanggung jawab dalam satu kali transfer. Bila anggota berkurang permanen, tarif menyesuaikan mulai sesi berikutnya. Anggota sebaiknya satu jenjang dan satu target; bila berbeda, tarif mengikuti jenjang tertinggi. Tempat belajar disediakan oleh kelompok.
+  </div>
+  <div class="price-note" style="margin-top:10px;">
+    <strong>Paket &amp; pembayaran.</strong> Paket dibayar penuh di muka sebelum sesi pertama dan terikat pada slot tetap mingguan. Paket 8 dan 12 sesi ditempatkan pada <strong>blok wilayah</strong> — hari dan rentang jam yang telah dialokasikan pengajar untuk area tersebut. Sesi yang tidak terpakai di bulan berjalan <strong>tidak hangus</strong> dan dapat dipindahkan ke bulan berikutnya dengan pemberitahuan di awal bulan. Reschedule tanpa biaya bila diberitahukan H-1; pembatalan kurang dari 12 jam sebelum sesi atau tidak hadir tanpa kabar terhitung sebagai sesi terpakai. Bila berhenti di tengah paket, sesi yang sudah terpakai dihitung ulang dengan tarif satuan tanpa potongan, dan sisa dana dikembalikan setelah selisih tersebut diperhitungkan.
+  </div>
+  <div class="price-note" style="margin-top:10px;">
+    <strong>Biaya transportasi</strong> di luar area gratis dibayar terpisah dan tidak terkena potongan paket. <strong>Konsultasi WhatsApp Premium</strong> berlaku pukul 08.00–21.00 untuk pertanyaan seputar materi yang sedang dipelajari, dan bukan pengganti sesi les. Untuk kelas kelompok, konsultasi berjalan melalui satu grup bersama. <strong>Modul dan bank soal</strong> untuk penggunaan pribadi siswa, tidak untuk disebarluaskan.
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<div class="subj-sec">
+  <div class="slabel">Mata Pelajaran &amp; Fokus</div>
+  <div class="subj-grid">
+    <div class="chip main">Matematika SD</div>
+    <div class="chip main">Matematika SMP</div>
+    <div class="chip main">Matematika SMA</div>
+    <div class="chip main">SNBT &amp; TKA</div>
+    <div class="chip main">Olimpiade SMP &amp; SMA</div>
+    <div class="chip new">SAT · GRE · GMAT</div>
+    <div class="chip new">Ujian Masuk Kelas Internasional</div>
+    <div class="chip">Matematika Kuliah Awal</div>
+    <div class="chip">Olimpiade SD</div>
+    <div class="chip">Persiapan Masuk PPG Prajabatan</div>
+    <div class="chip">TIU CPNS · SKB Matematika</div>
+  </div>
+</div>
+
+<!-- AREA -->
+<section class="area-sec">
+  <div class="slabel">Area Layanan</div>
+  <h2 class="stitle">Melayani Bekasi Barat hingga<br><em>Jakarta Timur &amp; sekitarnya.</em></h2>
+  <div class="area-grid">
+    <div class="area-box a1">
+      <div class="area-tier">🎯 Prioritas Utama</div>
+      <div class="area-list">
+        Bekasi Barat<br>
+        Kranji · Bintara · Jaka Sampurna<br>
+        Kota Baru · Kayuringin · Pekayon<br>
+        Grand Galaxy · Margajaya
+      </div>
+    </div>
+    <div class="area-box a2">
+      <div class="area-tier">✅ Terjangkau</div>
+      <div class="area-list">
+        Pondok Gede · Jatibening<br>
+        Jatiwaringin · Jatimakmur<br>
+        Bekasi Selatan · Duren Jaya<br>
+        Margahayu · Kalimalang
+      </div>
+    </div>
+    <div class="area-box a3">
+      <div class="area-tier">🔍 Selektif</div>
+      <div class="area-list">
+        Bekasi Timur · Rawalumbu<br>
+        Jakarta Timur · Jakarta Selatan<br>
+        (dekat stasiun KRL)<br>
+        Online — tanpa batas wilayah
+      </div>
+    </div>
+  </div>
+  <div class="area-note">
+    <strong>Gratis biaya transportasi</strong> untuk area Bekasi Barat &amp; radius ≤5 km. Area selektif dikenakan biaya transportasi aktual. <strong>Kelas online tersedia</strong> untuk semua wilayah tanpa biaya tambahan.
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="cred-sec">
+  <div>
+    <div class="cred-col-title">Pendidikan &amp; Sertifikasi</div>
+    <div class="cred-items">
+      <div class="cred-item-row">
+        <div class="cred-icon">🎓</div>
+        <div>
+          <div class="cred-main">S.Pd. Pendidikan Matematika</div>
+          <div class="cred-sub">Universitas Negeri Jakarta — salah satu LPTK terbaik Indonesia</div>
+        </div>
+      </div>
+      <div class="cred-item-row">
+        <div class="cred-icon">📜</div>
+        <div>
+          <div class="cred-main">PPG Prajabatan New Model 2023</div>
+          <div class="cred-sub">Sertifikasi guru profesional dari Kemdikbud RI</div>
+        </div>
+      </div>
+      <div class="cred-item-row">
+        <div class="cred-icon">🏫</div>
+        <div>
+          <div class="cred-main">Guru Matematika PPPK Aktif</div>
+          <div class="cred-sub">SMPN 20 Kota Bogor sejak 2024</div>
+        </div>
+      </div>
+      <div class="cred-item-row">
+        <div class="cred-icon">🌐</div>
+        <div>
+          <div class="cred-main">TOEFL Score 600</div>
+          <div class="cred-sub">Mampu mengajar matematika dalam Bahasa Inggris</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="cred-col-title">Pengalaman Profesional</div>
+    <div class="cred-items">
+      <div class="cred-item-row">
+        <div class="cred-icon">✏️</div>
+        <div>
+          <div class="cred-main">13+ Tahun Les Privat Matematika</div>
+          <div class="cred-sub">Sejak 2012 — dari SD hingga kuliah dan persiapan karir</div>
+        </div>
+      </div>
+      <div class="cred-item-row">
+        <div class="cred-icon">📚</div>
+        <div>
+          <div class="cred-main">Ex-Tim Matematika — PT Penerbit Erlangga</div>
+          <div class="cred-sub">Korektor &amp; reviewer konten matematika untuk buku pelajaran nasional</div>
+        </div>
+      </div>
+      <div class="cred-item-row">
+        <div class="cred-icon">🏆</div>
+        <div>
+          <div class="cred-main">≈95% Siswa Privat Diterima PTN Pilihan</div>
+          <div class="cred-sub">Track record konsisten dalam mempersiapkan siswa seleksi masuk universitas</div>
+        </div>
+      </div>
+      <div class="cred-item-row">
+        <div class="cred-icon">🥇</div>
+        <div>
+          <div class="cred-main">Juara Kelas Sepanjang Pendidikan Formal</div>
+          <div class="cred-sub">Pengajar sendiri meraih peringkat pertama dari SD hingga SMA — memahami secara langsung bagaimana cara belajar matematika yang efektif, dari sisi siswa terbaik sekalipun</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div class="proc-sec">
+  <div class="slabel">Cara Mulai</div>
+  <h2 class="stitle">Bergabung dalam<br><em>4 langkah mudah</em></h2>
+  <div class="proc-grid">
+    <div class="proc-step">
+      <div class="proc-n">01</div>
+      <div class="proc-t">Konsultasi</div>
+      <div class="proc-d">Hubungi via WhatsApp. Ceritakan jenjang, target, dan jadwal. Gratis, tanpa komitmen.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-n">02</div>
+      <div class="proc-t">Diagnosis Awal</div>
+      <div class="proc-d">Sesi pertama untuk mengidentifikasi kelemahan dan kekuatan siswa. Berbayar penuh dan terhitung sebagai sesi pertama.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-n">03</div>
+      <div class="proc-t">Pilih Paket</div>
+      <div class="proc-d">Tentukan Reguler atau Premium, sesi satuan atau paket bulanan sesuai kebutuhan &amp; budget.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-n">04</div>
+      <div class="proc-t">Mulai Belajar</div>
+      <div class="proc-d">Sesi berjalan. Siswa Premium mendapat laporan progres &amp; akses modul eksklusif.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-sec">
+  <div>
+    <div class="c-tagline">
+      Siap membantu kamu<br>
+      <em>menguasai matematika</em><br>
+      di semua level.
+    </div>
+    <div class="c-items">
+      <div class="c-item"><div class="c-ico">📱</div><span>WhatsApp: <a href="https://wa.me/628128336625" target="_blank" rel="noopener" class="c-val" style="color:#fff;text-decoration:none;border-bottom:1px solid rgba(184,144,58,.55);padding-bottom:1px;">+62 812-8336-625</a></span></div>
+      <div class="c-item"><div class="c-ico">📧</div><span>Email: <a href="mailto:ufukkinanti22@gmail.com" class="c-val" style="color:#fff;text-decoration:none;border-bottom:1px solid rgba(184,144,58,.55);padding-bottom:1px;">ufukkinanti22@gmail.com</a></span></div>
+      <div class="c-item"><div class="c-ico">💼</div><span>LinkedIn: <a href="https://www.linkedin.com/in/ufukkinanti" target="_blank" rel="noopener" class="c-val" style="color:#fff;text-decoration:none;border-bottom:1px solid rgba(184,144,58,.55);padding-bottom:1px;">linkedin.com/in/ufukkinanti</a></span></div>
+      <div class="c-item"><div class="c-ico">📍</div><span>Domisili: <span class="c-val">Jaka Sampurna, Bekasi Barat</span></span></div>
+      <div class="c-item"><div class="c-ico">🌐</div><span>Mode: <span class="c-val">Tatap Muka · Online · Kelompok</span></span></div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <span>Ufuk Kinanti, S.Pd. · Les Privat Matematika</span>
+  <span>Bekasi · Jakarta · 2026</span>
+</div>
+
+</div>
+  <!-- WhatsApp Floating Button -->
+<a href="https://wa.me/628128336625?text=Halo%20Bu%20Ufuk,%20saya%20tertarik%20dengan%20les%20matematika.%20Boleh%20tanya%20info%20lebih%20lanjut?" 
+   target="_blank" 
+   style="
+   position:fixed;
+   bottom:20px;
+   right:20px;
+   background:#25D366;
+   color:white;
+   font-size:16px;
+   padding:12px 18px;
+   border-radius:50px;
+   text-decoration:none;
+   box-shadow:0 4px 10px rgba(0,0,0,0.2);
+   z-index:999;">
+   💬 Konsultasi via WhatsApp
+</a>
+</body>
+</html>
